@@ -47,23 +47,16 @@ class SlackHandler:
         self.daily_usage = {}
         
     def setup_handlers(self):
-        """Setup all Slack event handlers"""
+        """Set up Slack event and command handlers"""
+        logger.info("Setting up Slack handlers...")
         
         # Message handlers
-        self.app.message(re.compile(r".*"))(self.handle_message)
+        self.app.message()(self.handle_message)
         
         # Command handlers
         self.app.command("/jace")(self.handle_jace_command)
         self.app.command("/tasks")(self.handle_tasks_command)
         self.app.command("/ai")(self.handle_ai_command)
-        
-        # Shortcut handlers
-        self.app.shortcut("quick_task")(self.handle_quick_task)
-        self.app.shortcut("break_down_task")(self.handle_break_down_task)
-        
-        # Button/interaction handlers
-        self.app.action("complete_task")(self.handle_complete_task)
-        self.app.action("get_ai_help")(self.handle_ai_help_request)
         
         # App mention handlers
         self.app.event("app_mention")(self.handle_app_mention)
