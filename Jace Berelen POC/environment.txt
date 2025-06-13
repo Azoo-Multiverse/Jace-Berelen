@@ -1,0 +1,203 @@
+# ====================================================================
+# JACE BERELEN POC - ENVIRONMENT CONFIGURATION TEMPLATE
+# Copy this to .env and fill in your actual values
+# DO NOT commit .env to git - keep your secrets safe!
+
+# ==============================================
+# SLACK CONFIGURATION (Required)
+# ==============================================
+
+# Bot User OAuth Token (starts with xoxb-)
+# Get from: Slack App → OAuth & Permissions → Bot User OAuth Token
+SLACK_BOT_TOKEN=xoxb-your-bot-token-here
+
+# Signing Secret (32 characters)
+# Get from: Slack App → Basic Information → Signing Secret
+SLACK_SIGNING_SECRET=your-32-character-signing-secret-here
+
+# App-Level Token (optional, for Socket Mode)
+# Get from: Slack App → Basic Information → App-Level Tokens
+SLACK_APP_TOKEN=xapp-your-app-level-token-here
+
+# ==============================================
+# AI CONFIGURATION (Required)
+# ==============================================
+
+# OpenRouter API Key (starts with sk-or-)
+# Get from: openrouter.ai → Keys
+OPENROUTER_API_KEY=sk-or-your-openrouter-key-here
+
+# OpenRouter App Configuration
+OPENROUTER_SITE_URL=https://jace-berelen.com
+OPENROUTER_APP_NAME=Jace Berelen POC
+
+# Aider Model Configuration
+# Claude 3.5 Sonnet via OpenRouter
+AIDER_MODEL=anthropic/claude-3.5-sonnet
+
+# AI Model Fallback Configuration (optional)
+# You can set backup models in case primary fails
+AI_MODEL_PRIMARY=anthropic/claude-3.5-sonnet
+AI_MODEL_FALLBACK=anthropic/claude-3-haiku
+
+# ==============================================
+# DATABASE CONFIGURATION
+# ==============================================
+
+# Stage 0: Local SQLite (for development)
+DATABASE_URL=sqlite:///./jace_berelen.db
+
+# Stage 1+: PostgreSQL (for production)
+# DATABASE_URL=postgresql://username:password@hostname:port/database_name
+
+# Supabase (when you upgrade from SQLite)
+# SUPABASE_URL=https://your-project.supabase.co
+# SUPABASE_ANON_KEY=your-anon-key
+# SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# ==============================================
+# REDIS CONFIGURATION (Stage 1+)
+# ==============================================
+
+# Local Redis (for development)
+REDIS_URL=redis://localhost:6379
+
+# Production Redis
+# REDIS_URL=redis://username:password@hostname:port
+
+# ==============================================
+# APPLICATION CONFIGURATION
+# ==============================================
+
+# Environment (development, staging, production)
+ENVIRONMENT=development
+
+# Log Level (DEBUG, INFO, WARNING, ERROR)
+LOG_LEVEL=INFO
+
+# Server Configuration
+HOST=0.0.0.0
+PORT=8000
+
+# Secret key for session management (generate a secure random string)
+SECRET_KEY=your-super-secret-key-here-generate-a-random-string
+
+# ==============================================
+# INTEGRATIONS (Optional)
+# ==============================================
+
+# GitHub Integration
+# GITHUB_TOKEN=ghp_your-github-personal-access-token
+
+# Trello Integration
+# TRELLO_API_KEY=your-trello-api-key
+# TRELLO_API_SECRET=your-trello-api-secret
+# TRELLO_TOKEN=your-trello-token
+
+# Gmail Integration (for email automation)
+# GMAIL_EMAIL=your-gmail-address@gmail.com
+# GMAIL_APP_PASSWORD=your-gmail-app-password
+
+# ==============================================
+# MONITORING & OBSERVABILITY (Stage 1+)
+# ==============================================
+
+# Sentry (for error tracking)
+# SENTRY_DSN=https://your-sentry-dsn-here
+
+# Prometheus (for metrics)
+# PROMETHEUS_PORT=9090
+
+# ==============================================
+# COST MANAGEMENT
+# ==============================================
+
+# Monthly budget limits (in USD)
+MONTHLY_BUDGET_LIMIT=100
+AI_COST_ALERT_THRESHOLD=80
+
+# Per-client budget tracking
+DEFAULT_CLIENT_BUDGET=20
+
+# ==============================================
+# SECURITY CONFIGURATION
+# ==============================================
+
+# Rate limiting (requests per minute)
+RATE_LIMIT_PER_MINUTE=60
+
+# Session timeout (in minutes)
+SESSION_TIMEOUT_MINUTES=30
+
+# Enable/disable certain features
+ENABLE_WEB_SCRAPING=true
+ENABLE_FILE_UPLOADS=false
+ENABLE_SYSTEM_COMMANDS=false
+
+# ==============================================
+# DEVELOPMENT & TESTING
+# ==============================================
+
+# Testing configuration
+TEST_DATABASE_URL=sqlite:///./test_jace_berelen.db
+TEST_SLACK_CHANNEL=test-channel
+
+# Development features
+DEBUG_MODE=true
+ENABLE_MOCK_SERVICES=false
+
+# ==============================================
+# DEPLOYMENT CONFIGURATION
+# ==============================================
+
+# Railway deployment (Stage 0-1)
+# RAILWAY_STATIC_URL=your-railway-app.up.railway.app
+
+# AWS Configuration (Stage 2+)
+# AWS_ACCESS_KEY_ID=your-aws-access-key
+# AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+# AWS_DEFAULT_REGION=us-west-2
+
+# ==============================================
+# WORKSPACE ISOLATION (Stage 1+)
+# ==============================================
+
+# Default workspace settings
+DEFAULT_WORKSPACE_TIMEOUT=3600
+MAX_CONCURRENT_TASKS_PER_WORKSPACE=3
+
+# Client-specific overrides (example)
+# CLIENT_ACME_BUDGET=50
+# CLIENT_ACME_TIMEOUT=7200
+
+# ==============================================
+# NOTES & INSTRUCTIONS
+# ==============================================
+
+# 1. NEVER commit this file to git
+# 2. Add .env to your .gitignore file
+# 3. Use different values for development/staging/production
+# 4. Rotate secrets regularly (every 30-90 days)
+# 5. Use a password manager to generate secure random values
+# 6. For production, consider using AWS Secrets Manager or similar
+
+# ==============================================
+# QUICK SETUP CHECKLIST
+# ==============================================
+
+# Stage 1 - Enhanced Features (Future)
+# SLACK_BOT_TOKEN
+# SLACK_SIGNING_SECRET
+# OPENROUTER_API_KEY
+# SECRET_KEY
+
+# Stage 2 - Production Ready (Future)
+# DATABASE_URL (PostgreSQL)
+# REDIS_URL
+# GITHUB_TOKEN
+# Email integration credentials
+
+# Stage 3 - Enterprise (Future)
+# All monitoring tools
+# AWS credentials
+# Security hardening variables 

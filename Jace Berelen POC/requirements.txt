@@ -1,4 +1,85 @@
-fastapi
-uvicorn
-pydantic
-python-dotenv
+# ====================================================================
+# JACE BERELEN POC - STAGE 0 REQUIREMENTS
+# AI-driven workflow automation platform for overemployment support
+# ====================================================================
+
+# Core Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Pydantic for data validation and settings
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Slack Integration
+slack-sdk==3.26.1
+
+# AI Integration (OpenRouter for Claude access)
+openai==1.5.0  # OpenRouter uses OpenAI-compatible API
+httpx==0.25.2  # For direct HTTP calls to OpenRouter
+
+# Database (SQLite for Stage 0)
+sqlalchemy==2.0.23
+aiosqlite==0.19.0  # Async SQLite support
+
+# Security & Authentication  
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Environment & Configuration
+python-dotenv==1.0.0
+
+# HTTP Client (already included above for OpenRouter)
+aiohttp==3.9.1
+
+# Data Processing & Utilities
+pandas==2.1.4
+numpy==1.25.2
+
+# Date/Time utilities
+python-dateutil==2.8.2
+
+# JSON utilities
+orjson==3.9.10
+
+# Logging & Rich output
+rich==13.7.0
+
+# File handling
+pathlib==1.0.1
+
+# System monitoring
+psutil==5.9.6
+
+# Background tasks
+celery==5.3.4
+
+# Caching (Redis for Stage 1+)
+redis==5.0.1
+
+# Testing (Development)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+
+# Code quality (Development)
+black==23.11.0
+isort==5.12.0
+flake8==6.1.0
+
+# Development tools
+watchdog==3.0.0
+
+# Additional utilities for overemployment features
+schedule==1.2.0  # Task scheduling
+requests==2.31.0  # HTTP requests
+beautifulsoup4==4.12.2  # Web scraping (optional)
+jinja2==3.1.2  # Template engine
+
+# Email support (for notifications)
+aiosmtplib==3.0.1
+
+# CLI tools
+click==8.1.7
+typer==0.9.0
