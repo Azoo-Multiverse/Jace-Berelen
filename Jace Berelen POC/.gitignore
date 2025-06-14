@@ -8,6 +8,7 @@
 .env.local
 .env.production
 environment_local.txt
+railway-env-generated.txt
 
 # Database files
 *.db
@@ -231,4 +232,9 @@ performance_logs/
 
 # Security scanning results
 security_reports/
-vulnerability_reports/ 
+vulnerability_reports/
+
+# Railway deployment files (keep templates, ignore generated)
+railway-env-generated.txt
+.railway/
+railway-secrets.txt 

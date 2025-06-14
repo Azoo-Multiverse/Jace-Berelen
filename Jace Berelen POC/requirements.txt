@@ -6,6 +6,7 @@
 # Core Web Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
+gunicorn==21.2.0  # Production WSGI server for Railway
 
 # Pydantic for data validation and settings
 pydantic==2.5.0
@@ -18,9 +19,11 @@ slack-sdk==3.26.1
 openai==1.5.0  # OpenRouter uses OpenAI-compatible API
 httpx==0.25.2  # For direct HTTP calls to OpenRouter
 
-# Database (SQLite for Stage 0)
+# Database (SQLite for development, PostgreSQL for Railway production)
 sqlalchemy==2.0.23
 aiosqlite==0.19.0  # Async SQLite support
+asyncpg==0.29.0   # Async PostgreSQL support for Railway
+psycopg2-binary==2.9.9  # PostgreSQL adapter
 
 # Security & Authentication  
 python-jose[cryptography]==3.3.0
@@ -55,8 +58,15 @@ psutil==5.9.6
 # Background tasks
 celery==5.3.4
 
-# Caching (Redis for Stage 1+)
+# Caching (Redis for Stage 1+, Railway Redis addon)
 redis==5.0.1
+
+# Railway Production Utilities
+dj-database-url==2.1.0  # Parse DATABASE_URL
+whitenoise==6.6.0  # Static file serving
+
+# Health checks and monitoring
+starlette==0.27.0  # For health endpoints
 
 # Testing (Development)
 pytest==7.4.3

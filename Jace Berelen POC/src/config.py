@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     port: int = Field(default=8000, alias="PORT")
     secret_key: str = Field(alias="SECRET_KEY")
     
+    # Railway environment detection
+    railway_environment: Optional[str] = Field(default=None, alias="RAILWAY_ENVIRONMENT")
+    
     # Slack Configuration
     slack_bot_token: str = Field(alias="SLACK_BOT_TOKEN")
     slack_signing_secret: str = Field(alias="SLACK_SIGNING_SECRET")
@@ -36,7 +39,7 @@ class Settings(BaseSettings):
     openrouter_site_url: str = Field(default="https://jace-berelen.com", alias="OPENROUTER_SITE_URL")
     openrouter_app_name: str = Field(default="Jace Berelen POC", alias="OPENROUTER_APP_NAME")
     
-    # Database
+    # Database - Railway provides DATABASE_URL automatically
     database_url: str = Field(default="sqlite:///./jace_berelen.db", alias="DATABASE_URL")
     
     # Cost Management
@@ -72,6 +75,11 @@ def get_settings() -> Settings:
     return settings
 
 
+def is_railway() -> bool:
+    """Check if running on Railway"""
+    return settings.railway_environment is not None or os.getenv("RAILWAY_ENVIRONMENT") is not None
+
+
 def validate_environment() -> tuple[bool, list[str]]:
     """Validate that all required environment variables are present"""
     missing = []
@@ -103,17 +111,22 @@ def get_database_url() -> str:
     """Get the appropriate database URL based on environment"""
     if settings.environment == "test":
         return settings.test_database_url
+    
+    # Railway automatically provides DATABASE_URL for PostgreSQL
+    if is_railway() and settings.database_url.startswith("postgresql"):
+        return settings.database_url
+    
     return settings.database_url
 
 
 def is_production() -> bool:
     """Check if running in production environment"""
-    return settings.environment.lower() == "production"
+    return settings.environment.lower() == "production" or is_railway()
 
 
 def is_development() -> bool:
     """Check if running in development environment"""
-    return settings.environment.lower() == "development"
+    return settings.environment.lower() == "development" and not is_railway()
 
 
 def get_slack_config() -> dict:
@@ -145,6 +158,12 @@ def get_openrouter_config() -> dict:
     }
 
 
+def get_port() -> int:
+    """Get port for Railway deployment"""
+    # Railway sets PORT environment variable
+    return int(os.getenv("PORT", settings.port))
+
+
 # Export commonly used settings
 __all__ = [
     "Settings",
@@ -154,6 +173,8 @@ __all__ = [
     "get_database_url",
     "is_production",
     "is_development",
+    "is_railway",
     "get_slack_config",
     "get_openrouter_config",
+    "get_port",
 ] 

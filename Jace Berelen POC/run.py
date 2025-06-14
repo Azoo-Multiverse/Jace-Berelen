@@ -8,6 +8,7 @@ import asyncio
 import logging
 import sys
 import signal
+import os
 from pathlib import Path
 
 # Add src to path
@@ -18,7 +19,9 @@ from src import (
     validate_environment, 
     init_database, 
     display_startup_banner,
-    setup_logging
+    setup_logging,
+    get_port,
+    is_railway
 )
 from src.main import app
 
@@ -36,6 +39,12 @@ async def startup_checks():
     
     # Display banner
     display_startup_banner()
+    
+    # Railway environment detection
+    if is_railway():
+        logger.info("Running on Railway - production mode enabled")
+        os.environ["ENVIRONMENT"] = "production"
+        os.environ["DEBUG_MODE"] = "false"
     
     # Environment validation
     logger.info("Validating environment...")
@@ -78,20 +87,41 @@ def main():
     # Import and run uvicorn
     import uvicorn
     
-    logger.info(f"Starting Jace Berelen POC on {settings.host}:{settings.port}")
+    # Get port for Railway
+    port = get_port()
+    host = "0.0.0.0" if is_railway() else settings.host
+    
+    logger.info(f"Starting Jace Berelen POC on {host}:{port}")
     logger.info(f"Environment: {settings.environment}")
-    logger.info(f"API Documentation: http://{settings.host}:{settings.port}/docs")
+    logger.info(f"Railway deployment: {is_railway()}")
+    
+    if not is_railway():
+        logger.info(f"API Documentation: http://{host}:{port}/docs")
     
     try:
-        uvicorn.run(
-            "src.main:app",
-            host=settings.host,
-            port=settings.port,
-            reload=settings.environment == "development",
-            log_level=settings.log_level.lower(),
-            access_log=True,
-            loop="asyncio"
-        )
+        # Production settings for Railway
+        if is_railway():
+            uvicorn.run(
+                "src.main:app",
+                host=host,
+                port=port,
+                reload=False,  # Never reload in production
+                log_level="info",
+                access_log=True,
+                loop="asyncio",
+                workers=1  # Railway works better with single worker
+            )
+        else:
+            # Development settings
+            uvicorn.run(
+                "src.main:app",
+                host=host,
+                port=port,
+                reload=settings.environment == "development",
+                log_level=settings.log_level.lower(),
+                access_log=True,
+                loop="asyncio"
+            )
     except KeyboardInterrupt:
         logger.info("Shutdown requested by user")
     except Exception as e:

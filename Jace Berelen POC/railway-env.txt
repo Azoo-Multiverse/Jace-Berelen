@@ -1,0 +1,56 @@
+# ====================================================================
+# JACE BERELEN POC - RAILWAY ENVIRONMENT CONFIGURATION
+# Copy these variables to your Railway project environment
+# ====================================================================
+
+# Application Settings
+ENVIRONMENT=production
+DEBUG_MODE=false
+LOG_LEVEL=INFO
+RAILWAY_ENVIRONMENT=production
+
+# Server (Railway automatically sets PORT)
+HOST=0.0.0.0
+# PORT is set automatically by Railway
+
+# Security (GENERATE A STRONG SECRET!)
+SECRET_KEY=your-super-secret-key-generate-a-strong-one-here
+
+# Slack Bot Configuration
+SLACK_BOT_TOKEN=xoxb-your-bot-token-here
+SLACK_SIGNING_SECRET=your-signing-secret-here
+SLACK_APP_TOKEN=xapp-your-app-token-here
+
+# OpenRouter AI Configuration
+OPENROUTER_API_KEY=sk-or-your-openrouter-api-key-here
+AIDER_MODEL=anthropic/claude-3.5-sonnet
+AI_MODEL_PRIMARY=anthropic/claude-3.5-sonnet
+AI_MODEL_FALLBACK=anthropic/claude-3-haiku
+OPENROUTER_SITE_URL=https://jace-berelen.railway.app
+OPENROUTER_APP_NAME=Jace Berelen POC
+
+# Database (Railway PostgreSQL - set automatically)
+# DATABASE_URL will be provided by Railway PostgreSQL service
+
+# Cost Management
+MONTHLY_BUDGET_LIMIT=100.0
+AI_COST_ALERT_THRESHOLD=80.0
+DEFAULT_CLIENT_BUDGET=20.0
+
+# Security & Rate Limiting
+RATE_LIMIT_PER_MINUTE=60
+SESSION_TIMEOUT_MINUTES=30
+
+# Feature Flags
+ENABLE_WEB_SCRAPING=true
+ENABLE_FILE_UPLOADS=false
+ENABLE_SYSTEM_COMMANDS=false
+
+# ====================================================================
+# RAILWAY SETUP INSTRUCTIONS:
+# 1. Create a new Railway project
+# 2. Connect your GitHub repository
+# 3. Add PostgreSQL database service
+# 4. Set these environment variables in Railway dashboard
+# 5. Deploy!
+# ==================================================================== 

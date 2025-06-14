@@ -1,0 +1,17 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python run.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[environments]
+[environments.production]
+
+[environments.production.variables]
+RAILWAY_ENVIRONMENT = "production"
+PYTHONPATH = "/app"
+PORT = "8000" 

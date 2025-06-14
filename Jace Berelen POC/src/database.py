@@ -1,6 +1,6 @@
 """
 Database models and connection management
-SQLite for Stage 0, designed to easily migrate to PostgreSQL
+SQLite for development, PostgreSQL for Railway production
 """
 
 import asyncio
@@ -16,10 +16,11 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, Session
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
-from sqlalchemy.dialects.sqlite import insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
+from sqlalchemy.dialects.postgresql import insert as postgresql_insert
 from sqlalchemy.sql import text
 
-from .config import settings
+from .config import settings, is_railway, get_database_url
 
 logger = logging.getLogger(__name__)
 
@@ -300,20 +301,24 @@ class DatabaseManager:
         
     def initialize_sync_db(self):
         """Initialize synchronous database connection"""
-        if settings.database_url.startswith("sqlite"):
+        database_url = get_database_url()
+        
+        if database_url.startswith("sqlite"):
             # SQLite configuration
             self.engine = create_engine(
-                settings.database_url,
+                database_url,
                 connect_args={"check_same_thread": False},
                 echo=settings.environment == "development"
             )
         else:
-            # PostgreSQL configuration
+            # PostgreSQL configuration for Railway
             self.engine = create_engine(
-                settings.database_url,
+                database_url,
                 echo=settings.environment == "development",
-                pool_size=10,
-                max_overflow=20
+                pool_size=5,
+                max_overflow=10,
+                pool_pre_ping=True,
+                pool_recycle=300
             )
         
         self.session_factory = sessionmaker(
@@ -327,16 +332,27 @@ class DatabaseManager:
     def initialize_async_db(self):
         """Initialize asynchronous database connection"""
         # Convert sync URL to async URL
-        async_url = settings.database_url
+        database_url = get_database_url()
+        async_url = database_url
+        
         if async_url.startswith("sqlite"):
             async_url = async_url.replace("sqlite://", "sqlite+aiosqlite://")
+            # SQLite async engine
+            self.async_engine = create_async_engine(
+                async_url,
+                echo=settings.environment == "development"
+            )
         elif async_url.startswith("postgresql"):
             async_url = async_url.replace("postgresql://", "postgresql+asyncpg://")
-        
-        self.async_engine = create_async_engine(
-            async_url,
-            echo=settings.environment == "development"
-        )
+            # PostgreSQL async engine for Railway
+            self.async_engine = create_async_engine(
+                async_url,
+                echo=settings.environment == "development",
+                pool_size=5,
+                max_overflow=10,
+                pool_pre_ping=True,
+                pool_recycle=300
+            )
         
         self.async_session_factory = async_sessionmaker(
             bind=self.async_engine,
