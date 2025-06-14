@@ -1,5 +1,0 @@
-aider-chat
-python-dotenv
-pytest
-black
-flake8

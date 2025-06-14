@@ -1,1 +1,0 @@
-pyenv0.bat && pyenv1.bat && pyenv2.bat

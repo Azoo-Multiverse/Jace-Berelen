@@ -1,1 +1,0 @@
-../../.pyenv/Scripts/activate.bat
