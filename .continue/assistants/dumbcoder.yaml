@@ -1,0 +1,19 @@
+name: Dumb Coder
+version: 0.0.1
+schema: v1
+
+models:
+  - name: Claude Sonnet 4
+    title: Claude Sonnet 4 (OpenRouter)
+    provider: openrouter
+    model: anthropic/claude-sonnet-4
+    apiKey: "${OPENROUTER_API_KEY}"
+    roles: [chat]
+    defaultCompletionOptions:
+      temperature: 0.0
+      top_p: 1.0
+      frequency_penalty: 0.0
+      presence_penalty: 0.0
+      maxTokens: 8192
+
+defaultModel: Claude Sonnet 4

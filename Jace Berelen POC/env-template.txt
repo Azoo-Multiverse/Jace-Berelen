@@ -1,0 +1,84 @@
+# ====================================================================
+# JACE BERELEN POC - SECRETS ONLY
+# Copie para .env e preencha com suas credenciais reais
+# ====================================================================
+
+# ============================================================================
+# SECURITY SECRETS (REQUIRED)
+# ============================================================================
+
+# Gere uma chave secreta forte:
+# python -c "import secrets; print(secrets.token_urlsafe(32))"
+SECRET_KEY=your-super-secret-key-generate-a-strong-one-here
+
+# ============================================================================
+# SLACK CREDENTIALS (REQUIRED)
+# ============================================================================
+
+# Bot Token - pegar em https://api.slack.com/apps
+# Formato: xoxb-1234567890-1234567890-abc123def456
+SLACK_BOT_TOKEN=xoxb-your-slack-bot-token-here
+
+# Signing Secret - pegar em https://api.slack.com/apps
+# Formato: abc123def456...
+SLACK_SIGNING_SECRET=your-slack-signing-secret-here
+
+# App Token - pegar em https://api.slack.com/apps (opcional)
+# Formato: xapp-1-A1234567890-1234567890-abc123def456
+SLACK_APP_TOKEN=xapp-your-slack-app-token-here
+
+# ============================================================================
+# AI CREDENTIALS (REQUIRED)
+# ============================================================================
+
+# OpenRouter API Key - pegar em https://openrouter.ai
+# Formato: sk-or-1234567890abcdef...
+OPENROUTER_API_KEY=sk-or-your-openrouter-api-key-here
+
+# ============================================================================
+# DATABASE CREDENTIALS (OPTIONAL)
+# ============================================================================
+
+# Para desenvolvimento local: usar SQLite (padrão)
+# Para produção: usar PostgreSQL (Railway/Heroku/etc)
+# DATABASE_URL=postgresql://user:password@host:port/dbname
+
+# ============================================================================
+# OPTIONAL OVERRIDES
+# ============================================================================
+
+# Sobrescrever environment (development/production/staging)
+# ENVIRONMENT=development
+
+# Sobrescrever debug mode (true/false)
+# DEBUG_MODE=true
+
+# Sobrescrever log level (DEBUG/INFO/WARNING/ERROR)
+# LOG_LEVEL=INFO
+
+# Sobrescrever host/port
+# HOST=0.0.0.0
+# PORT=8000
+
+# ============================================================================
+# DEVELOPMENT HELPERS (OPTIONAL)
+# ============================================================================
+
+# URL pública para desenvolvimento (ngrok/localtunnel)
+# PUBLIC_URL=https://abc123.ngrok.io
+
+# Site URL para OpenRouter
+# OPENROUTER_SITE_URL=https://abc123.ngrok.io
+
+# ============================================================================
+# USAGE INSTRUCTIONS
+# ============================================================================
+
+# 1. Copie este arquivo para .env:
+#    cp env-template.txt .env
+#
+# 2. Preencha suas credenciais reais
+#
+# 3. Nunca commite o .env no git!
+#
+# 4. Para Railway/produção, use as environment variables do dashboard 
