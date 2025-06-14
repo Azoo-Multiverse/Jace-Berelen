@@ -10,7 +10,7 @@ def git_commit_and_push(message):
     try:
         subprocess.run(f'git -C "{PROJECT_DIR}" add .', check=True, shell=True)
         subprocess.run(f'git -C "{PROJECT_DIR}" commit -m "{message}"', check=True, shell=True)
-        subprocess.run(f'git -C "{PROJECT_DIR}" push', check=True, shell=True)
+        # subprocess.run(f'git -C "{PROJECT_DIR}" push', check=True, shell=True)
     except subprocess.CalledProcessError as e:
         print(f"Git error: {e}")
 
