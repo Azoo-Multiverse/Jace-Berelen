@@ -1,8 +1,10 @@
 do not use emojis
 
-write all files in french
+write all files in portuguese
 
-do not ask me too accept or I will switch to aider
+do not ask me to accept or any questions, just execute the tasks,  or I will switch to aider
+
+do not send me any text on the chat besides "taskX done". I can see all the changes on git later.
 
 for every task you complete successfully, move the taskX folder to DONE/taskX and write a human comprehensive taskX_report.md
 
@@ -10,4 +12,9 @@ execute all the tasks in ./TASKS/TODO, after each, write a commit with the task 
 
 commit after each task
 
-do not EVER touch this file or .git folder
+do not EVER touch:
+- this file
+- .git folder
+- deliver.py
+
+run "python deliver.py" after executing each task

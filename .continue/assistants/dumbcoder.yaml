@@ -7,7 +7,7 @@ models:
     title: Claude Sonnet 4 (OpenRouter)
     provider: openrouter
     model: anthropic/claude-sonnet-4
-    apiKey: ""
+    apiKey: "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"
     roles: [chat]
     defaultCompletionOptions:
       temperature: 1.0
