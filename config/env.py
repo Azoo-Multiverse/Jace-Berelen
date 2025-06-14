@@ -36,9 +36,9 @@ DEFAULT_TEST_DATABASE_URL = "sqlite:///./test_jace_berelen.db"
 # ============================================================================
 
 # Modelos disponíveis
-DEFAULT_AIDER_MODEL = "anthropic/claude-3.5-sonnet"
-DEFAULT_AI_MODEL_PRIMARY = "anthropic/claude-3.5-sonnet"
-DEFAULT_AI_MODEL_FALLBACK = "anthropic/claude-3-haiku"
+DEFAULT_AIDER_MODEL = "groq/llama3-70b-8192"
+FALLBACK_AIDER_MODEL = "ollama/codellama:13b"
+BACKUP_AIDER_MODEL = "together_ai/codellama/CodeLlama-34b-Instruct-hf"
 
 # URLs públicas padrão
 DEFAULT_OPENROUTER_SITE_URL = "https://jace-berelen.com"
@@ -224,7 +224,7 @@ __all__ = [
     "DEFAULT_DATABASE_URL", "DEFAULT_TEST_DATABASE_URL",
     
     # AI
-    "DEFAULT_AIDER_MODEL", "DEFAULT_AI_MODEL_PRIMARY", "DEFAULT_AI_MODEL_FALLBACK",
+    "DEFAULT_AIDER_MODEL", "FALLBACK_AIDER_MODEL", "BACKUP_AIDER_MODEL",
     "DEFAULT_OPENROUTER_SITE_URL", "DEFAULT_OPENROUTER_APP_NAME", "OPENROUTER_BASE_URL",
     
     # Costs
@@ -265,4 +265,22 @@ __all__ = [
     
     # Development
     "DEVELOPMENT_DEFAULTS"
-] 
+]
+
+# Free/Low-cost Provider Options
+GROQ_MODELS = {
+    "fast": "groq/llama3-70b-8192",
+    "coding": "groq/mixtral-8x7b-32768",
+    "small": "groq/llama3-8b-8192"
+}
+
+OLLAMA_MODELS = {
+    "coding": "ollama/codellama:13b",
+    "general": "ollama/deepseek-coder:6.7b",
+    "small": "ollama/codellama:7b"
+}
+
+TOGETHER_MODELS = {
+    "coding": "together_ai/codellama/CodeLlama-34b-Instruct-hf",
+    "general": "together_ai/meta-llama/Llama-2-70b-chat-hf"
+} 
