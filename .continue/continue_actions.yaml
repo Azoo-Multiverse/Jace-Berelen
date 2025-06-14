@@ -1,4 +1,0 @@
-- name: Run Task Pipeline
-  description: Executes all tasks in TASKS/TODO, generates reports, moves them to DONE, and commits
-  command: python .continue/run_task_pipeline.py
-  when: always

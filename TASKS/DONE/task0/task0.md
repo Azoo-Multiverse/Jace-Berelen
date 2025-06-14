@@ -1,0 +1,1 @@
+perform a systematical cleaning in this repository considering I am not using railway anymore and I want to avoid having files in the root folder except for key files like README.md, .gitignore and similar
